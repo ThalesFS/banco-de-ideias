@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - Banco de Ideias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+        <a href="index.html">
+          <img src="imagens/uffBDIicone.png" alt="Icone UFF BDI" class="iconeBDI">
+        </a>
+      </div>
+  </header>
+
+  <main class="login-container">
+    <form class="login-card">
+
+      <h2>Boas vindas!</h2>
+      <h3>Login</h3>
+
+      <label for="email">E-mail</label>
+      <input id="email" type="email" placeholder="Insira seu e-mail" required>
+
+      <label for="senha">Senha</label>
+      <div class="password-field">
+        <input id="senha" type="password" placeholder="Insira sua senha" required>
+      </div>
+
+      <div class="options">
+        <label><input type="checkbox"> Lembrar desse dispositivo</label>
+        <a href="#" class="forgot">Esqueci a senha</a>
+      </div>
+
+      <button type="submit" class="btn-login">Login</button>
+
+      <p class="register">Não tem uma conta? <a href="#">Registrar</a></p>
+    </form>
+  </main>
+</body>
+</html>
