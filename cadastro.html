@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastro - Banco de Ideias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="imagens/uffBDIicone.png" alt="Icone UFF BDI" class="iconeBDI">
+      </a>
+    </div>
+  </header>
+
+  <main class="login-container">
+    <form class="login-card">
+      <h2>Bem-vindo(a)!</h2>
+      <h3>Criar Conta</h3>
+
+      <label for="nome">Nome completo</label>
+      <input id="nome" type="text" placeholder="Insira seu nome completo" required>
+
+      <label for="email">E-mail</label>
+      <input id="email" type="email" placeholder="Insira seu e-mail" required>
+
+      <label for="matricula">Matrícula</label>
+      <input id="matricula" type="text" placeholder="Insira sua matrícula" required>
+Voce é:
+      <label><input type="radio" name="tipo" value="aluno" checked> Aluno</label>
+      <label><input type="radio" name="tipo" value="professor"> Professor</label>
+      
+      <div id="field-aluno">
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso">
+      </div>
+      <div id="field-professor">
+        <label for="departamento">Departamento:</label>
+        <input type="text" id="departamento">
+      </div>
+
+      <label for="senha">Senha</label>
+      <div class="password-field">
+        <input id="senha" type="password" placeholder="Crie uma senha" required>
+      </div>
+
+      <label for="confirmar-senha">Confirmar senha</label>
+      <div class="password-field">
+        <input id="confirmar-senha" type="password" placeholder="Confirme sua senha" required>
+      </div>
+
+      <button type="submit" class="btn-login">Registrar</button>
+
+      <p class="register">Já tem uma conta? <a href="login.html">Fazer login</a></p>
+    </form>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const radioAluno = document.querySelector('input[value="aluno"]');
+        const radioProfessor = document.querySelector('input[value="professor"]');
+        
+        const fieldAluno = document.getElementById('field-aluno');
+        const fieldProfessor = document.getElementById('field-professor');
+        
+        //função para mostrar e ocultar os campos
+        function toggleFields() {
+            if (radioAluno.checked) {
+            fieldAluno.style.display = 'block';
+            fieldProfessor.style.display = 'none';
+            } else {
+            fieldAluno.style.display = 'none';
+            fieldProfessor.style.display = 'block';
+            }
+        }
+  
+        radioAluno.addEventListener('change', toggleFields);
+        radioProfessor.addEventListener('change', toggleFields);
+  
+        // Chama a função inicialmente para configurar o estado correto
+        toggleFields();
+    });
+  </script>
+
+</body>
+</html>
