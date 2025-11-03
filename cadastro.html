@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cadastro - Banco de Ideias</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="cadastro.css">
+  <link rel="stylesheet" href="estilos/cadastro.css">
 </head>
 <body>
   <header class="navbar">
@@ -83,6 +83,57 @@ Voce é:
   
         // Chama a função inicialmente para configurar o estado correto
         toggleFields();
+    });
+
+      document.querySelector(".login-card").addEventListener("submit", async function(event) {
+      event.preventDefault(); // impede recarregar a página
+
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const matricula = document.getElementById("matricula").value;
+      const senha = document.getElementById("senha").value;
+      const confirmarSenha = document.getElementById("confirmar-senha").value;
+
+      const tipo = document.querySelector('input[name="tipo"]:checked').value;
+      const curso = document.getElementById("curso").value;
+      const departamento = document.getElementById("departamento").value;
+
+      // validação simples
+      if (senha !== confirmarSenha) {
+        alert("As senhas não são iguais!");
+        return;
+      }
+
+      const usuario = {
+        nome,
+        email,
+        matricula,
+        senha,
+        tipo, // (aluno ou professor)
+        curso: tipo === "aluno" ? curso : null,
+        departamento: tipo === "professor" ? departamento : null
+      };
+
+      console.log("Enviando:", usuario);
+
+      try {
+        const response = await fetch("http://localhost:8080/api/usuarios", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(usuario)
+        });
+
+        if (!response.ok) {
+          throw new Error("Erro ao cadastrar usuário");
+        }
+
+        alert("Cadastro realizado com sucesso!");
+        window.location.href = "login.html";
+
+      } catch (error) {
+        console.error(error);
+        alert("Não foi possível realizar o cadastro.");
+      }
     });
   </script>
 
