@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastrar Ideia - Banco de Ideias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/estilos/cadastrarIdeia.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="/professorHome.html">
+        <img src="/imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI">
+      </a>
+    </div>
+    <a href="#" class="logout">Logout ↗</a>
+  </header>
+
+  <main class="container">
+    <form class="form-ideia" id="formIdeia" novalidate>
+      <div class="form-header">
+        <h2>Criar Projeto</h2>
+        <a href="/professorHome.html" class="close-btn">×</a>
+      </div>
+
+      <label for="titulo">Título*</label>
+      <input type="text" id="titulo" name="titulo" placeholder="Insira o título do projeto" required>
+
+      <label for="descricao">Descrição*</label>
+      <textarea id="descricao" name="descricao" rows="4" placeholder="Insira a descrição do seu projeto" required></textarea>
+
+      <label for="tecnologias">Tecnologias</label>
+      <input type="text" id="tecnologias" name="tecnologias" placeholder="Insira tecnologias necessárias para o projeto">
+
+      <label for="cursos">Cursos*</label>
+      <input type="text" id="cursos" name="cursos" placeholder="Insira os cursos que podem utilizar o projeto" required>
+
+      <button type="submit" class="btn-criar">Cadastrar Ideia!</button>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("formIdeia").addEventListener("submit", function(event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+        this.reportValidity();
+      } else {
+        alert("Ideia criada com sucesso!");
+      }
+    });
+  </script>
+</body>
+</html>

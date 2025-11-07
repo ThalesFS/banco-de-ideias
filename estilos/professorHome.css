@@ -13,7 +13,7 @@ body {
   color: var(--dark);
 }
 
-/* Header */
+/* header */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -29,12 +29,12 @@ body {
 }
 
 .iconeBDI {
-  width: 50px;
+  width: 80px;
+  transition: transform 0.2s ease;
 }
 
-.titulo {
-  font-weight: 700;
-  font-size: 1.2rem;
+.iconeBDI:hover {
+  transform: scale(1.05);
 }
 
 .logout {
@@ -47,7 +47,6 @@ body {
   opacity: .6;
 }
 
-/* Conteúdo principal */
 .container {
   text-align: center;
   margin-top: 2rem;
@@ -64,23 +63,31 @@ h2 {
 
 /* Cards */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
+  display: flex;
   justify-content: center;
-  max-width: 900px;
-  margin: 2rem auto;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: nowrap; /* mantem alinhado horizontalmente */
+  margin: 3rem auto;
   padding: 1rem;
+  max-width: 1200px;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    flex-wrap: wrap;
+  }
 }
 
 .card {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  padding: 2rem 1rem;
+  padding: 2rem 1.5rem;
   text-align: center;
   text-decoration: none;
   color: var(--dark);
+  width: 240px;
   transition: transform .2s, box-shadow .2s;
 }
 
@@ -90,12 +97,22 @@ h2 {
 }
 
 .icon {
-  font-size: 2rem;
-  color: var(--primary);
-  margin-bottom: .8rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon img {
+  width: 60px; /* tamanho uniforme para os icones */
+  height: 60px;
 }
 
 .card p {
   font-weight: 600;
   font-size: 1rem;
+}
+
+.card-cadastrar .icon img {
+  transform: scale(1.2);
+  transform-origin: center;
 }
