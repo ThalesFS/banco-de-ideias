@@ -1,0 +1,101 @@
+:root {
+  --primary: #22b455;
+  --bg: #f7f5f0;
+  --dark: #121212;
+  --gray: #555;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--dark);
+}
+
+/* Header */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.iconeBDI {
+  width: 50px;
+}
+
+.titulo {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.logout {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity .2s;
+}
+.logout:hover {
+  opacity: .6;
+}
+
+/* Conteúdo principal */
+.container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+.professor-nome {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 2rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--dark);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+}
+
+.icon {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: .8rem;
+}
+
+.card p {
+  font-weight: 600;
+  font-size: 1rem;
+}
