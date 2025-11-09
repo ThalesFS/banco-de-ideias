@@ -118,7 +118,7 @@ input:focus, textarea:focus {
 
 /* Botão */
 .btn-criar {
-  background-color: #b8e9c5;
+  background-color: #84e69e; /*#b8e9c5*/
   color:white;
   font-weight: 600;
   border: none;
@@ -130,7 +130,7 @@ input:focus, textarea:focus {
 }
 
 .btn-criar:hover {
-  background-color: #a6e1b5;
+  background-color: #68cf82;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 

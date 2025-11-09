@@ -40,5 +40,44 @@
       <p class="register">Não tem uma conta? <a href="cadastro.html">Registrar</a></p>
     </form>
   </main>
+  <script>
+    document.querySelector(".login-card").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      const loginData = { email, senha };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(loginData)
+        });
+
+        if (!response.ok) {
+          alert("E-mail e/ou senha incorretos!");
+          return;
+        }
+
+        const user = await response.json();
+
+        // aqui vou salvar o login no navegador, sem tempo irmão
+        localStorage.setItem("usuario", JSON.stringify(user));
+
+        // Redirecionar conforme o tipo do usuario logado
+        if (user.tipo === "aluno") {
+          window.location.href = "alunoHome.html";
+        } else {
+          window.location.href = "professorHome.html";
+        }
+
+      } catch (error) {
+        console.log(error);
+        alert("Erro ao fazer login.");
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+:root {
+  --primary: #22b455;
+  --bg: #f7f5f0;
+  --dark: #121212;
+  --gray: #555;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--dark);
+}
+
+/* header */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.iconeBDI {
+  width: 80px;
+  transition: transform 0.2s ease;
+}
+
+.iconeBDI:hover {
+  transform: scale(1.05);
+}
+
+.logout {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity .2s;
+}
+.logout:hover {
+  opacity: .6;
+}
+
+.container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+.aluno-nome {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: nowrap; /* mantem alinhado horizontalmente */
+  margin: 3rem auto;
+  padding: 1rem;
+  max-width: 1200px;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    flex-wrap: wrap;
+  }
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--dark);
+  width: 240px;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon img {
+  width: 60px; /* tamanho uniforme para os icones */
+  height: 60px;
+}
+
+.card p {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.card-cadastrar .icon img {
+  transform: scale(1.2);
+  transform-origin: center;
+}
