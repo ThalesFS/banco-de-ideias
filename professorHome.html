@@ -8,13 +8,21 @@
   <link rel="stylesheet" href="/estilos/professorHome.css">
 </head>
 <body>
+
+  <script>
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+      if (!usuario) {
+        window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
+      }
+  </script>
+
   <header class="navbar">
     <div class="logo">
       <a href="/professorHome.html">
         <img src="imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI">
       </a>
     </div>
-    <a href="#" class="logout">Logout ↗</a>
+    <a href="#" class="logout" id="logout">Logout ↗</a>
   </header>
 
   <main class="container">
@@ -50,5 +58,12 @@
       </a>
     </section>
   </main>
+  <script>
+    // aqui é o logout simples
+    document.getElementById("logout").addEventListener("click", function() {
+      localStorage.removeItem("usuario");
+      window.location.href = "index.html";
+    });
+  </script>
 </body>
 </html>
