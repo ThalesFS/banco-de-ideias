@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,13 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/estilos/cadastrarIdeia.css">
 </head>
+
 <body>
 
   <script>
     const usuario = JSON.parse(localStorage.getItem("usuario"));
-      if (!usuario) {
-        window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
-      }
+    if (!usuario) {
+      window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
+    }
   </script>
 
   <header class="navbar">
@@ -36,10 +38,12 @@
       <input type="text" id="titulo" name="titulo" placeholder="Insira o título do projeto" required>
 
       <label for="descricao">Descrição*</label>
-      <textarea id="descricao" name="descricao" rows="4" placeholder="Insira a descrição do seu projeto" required></textarea>
+      <textarea id="descricao" name="descricao" rows="4" placeholder="Insira a descrição do seu projeto"
+        required></textarea>
 
       <label for="tecnologias">Tecnologias</label>
-      <input type="text" id="tecnologias" name="tecnologias" placeholder="Insira tecnologias necessárias para o projeto">
+      <input type="text" id="tecnologias" name="tecnologias"
+        placeholder="Insira tecnologias necessárias para o projeto">
 
       <label for="cursos">Cursos*</label>
       <input type="text" id="cursos" name="cursos" placeholder="Insira os cursos que podem utilizar o projeto" required>
@@ -49,21 +53,53 @@
   </main>
 
   <script>
-    document.getElementById("formIdeia").addEventListener("submit", function(event) {
-      if (!this.checkValidity()) {
-        event.preventDefault();
-        this.reportValidity();
-      } else {
-        alert("Ideia criada com sucesso!");
-      }
-    });
-  </script>
-  <script>
-    // aqui é o logout simples
-    document.getElementById("logout").addEventListener("click", function() {
-      localStorage.removeItem("usuario");
-      window.location.href = "index.html";
-    });
+    document.addEventListener("DOMContentLoaded", () => {
+      // aqui é o logout simples
+      document.getElementById("logout").addEventListener("click", function () {
+        localStorage.removeItem("usuario");
+        window.location.href = "index.html";
+      });
+
+      const usuarioForm = JSON.parse(localStorage.getItem("usuario"));
+      const form = document.getElementById("formIdeia");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // impede o envio automático padrão
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const novaIdeia = {
+          professorId: usuarioForm.id,
+          titulo: document.getElementById("titulo").value,
+          descricao: document.getElementById("descricao").value,
+          cursos: document.getElementById("cursos").value,
+          tecnologias: document.getElementById("tecnologias").value
+        };
+
+        fetch("http://localhost:8080/api/ideias", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(novaIdeia)
+        })
+          .then(response => {
+            if (!response.ok) throw new Error("Erro ao cadastrar ideia");
+            return response.json();
+          })
+          .then(data => {
+            alert("Ideia cadastrada com sucesso!");
+            form.reset(); // limpa o formulário
+            window.location.href = "professorHome.html"; // volta para tela inicial
+          })
+          .catch(error => {
+            console.error("Erro:", error);
+            alert("Ocorreu um erro ao cadastrar a ideia. Tente novamente.");
+          });
+      });
+    });  
   </script>
 </body>
+
 </html>

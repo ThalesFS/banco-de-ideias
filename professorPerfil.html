@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/estilos/professorPerfil.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <a href="/professorHome.html">
+                <img src="/imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI">
+            </a>
+        </div>
+        <a href="#" class="logout" id="logout">Logout ↗</a>
+    </header>
+    <main class="container">
+        <form class="form-perfil" id="formPerfil" novalidate>
+            <div class="form-header">
+                <h2>Meu Perfil</h2>
+                <a href="/professorHome.html" class="close-btn">×</a>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nome completo</label>
+                    <p class="field-display" id="nomeCompleto">Professor</p>
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <p class="field-display" id="email">email@id.uff.br</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Departamento</label>
+                    <p class="field-display" id="departamento">Departamento</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Matrícula</label>
+                    <p class="field-display" id="matricula">123456789</p>
+                </div>
+            </div>
+
+            <h3 class="subtitulo">Alterar senha</h3>
+            <div class="form-grid">
+                <div class="form-group senha-group">
+                    <label for="senhaAtual">Senha atual</label>
+                    <div class="senha-wrapper">
+                        <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Insira sua senha atual"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group senha-group">
+                    <label for="novaSenha">Nova senha</label>
+                    <div class="senha-wrapper">
+                        <input type="password" id="novaSenha" name="novaSenha" placeholder="Insira sua nova senha"
+                            required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-salvar">Salvar Alterações</button>
+        </form>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- Protege a página ---
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+            if (!usuario) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            // --- Logout ---
+            document.getElementById("logout").addEventListener("click", () => {
+                localStorage.removeItem("usuario");
+                window.location.href = "index.html";
+            });
+
+            // --- Carrega dados do professor ---
+            fetch(`http://localhost:8080/api/professores/${usuario.id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("Erro ao carregar dados do professor");
+                    return res.json();
+                })
+                .then(professor => {
+                    document.getElementById("nomeCompleto").innerText = professor.nome;
+                    document.getElementById("email").innerText = professor.email;
+                    document.getElementById("departamento").innerText = professor.departamento;
+                    document.getElementById("matricula").innerText = professor.matricula;
+                })
+                .catch(err => console.error(err));
+
+            // --- Alterar senha ---
+            const form = document.getElementById("formPerfil");
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+
+                const senhaAtual = document.getElementById("senhaAtual").value;
+                const novaSenha = document.getElementById("novaSenha").value;
+
+                fetch(`http://localhost:8080/api/professores/${usuario.id}/senha`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ senhaAtual, novaSenha })
+                })
+                    .then(res => {
+                        if (!res.ok) return res.text().then(msg => { throw new Error(msg); });
+                        return res.text();
+                    })
+                    .then(msg => {
+                        alert(msg);
+                        form.reset();
+                    })
+                    .catch(err => alert("Erro: " + err.message));
+            });
+        });
+    </script>
+</body>
+
+</html>
