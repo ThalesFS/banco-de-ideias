@@ -7,7 +7,7 @@ Uma plataforma web para conectar **professores** e **alunos de tecnologia** da U
 ## 📌 Objetivo  
 
 O **Banco de Ideias** tem como propósito:  
-- Facilitar a comunicação entre professores que possuem ideias de projetos e alunos dos cursos de tecnologia (SI, CC, EngS).  
+- Facilitar a comunicação entre professores que possuem ideias de projetos e alunos dos cursos de tecnologia (SI e CC).  
 - Unificar todas as propostas em um **mural de projetos**.  
 - Oferecer aos alunos a oportunidade de encontrar temas relevantes e aplicáveis para seus TCCs.  
 - Apoiar professores que têm boas ideias, mas não dominam a parte técnica de implementação.  
@@ -31,18 +31,18 @@ O projeto foi pensado em **5 módulos** principais:
 O MVP será focado nos módulos **Prospecção** e **Gestão**, permitindo:  
 
 - Professores submetem ideias de projetos.  
-- Alunos acessam um mural com todas as ideias disponíveis.  
-- Diferenciação de perfis (Aluno x Professor).  
-- Exibição detalhada de cada ideia.  
-- Perfil básico de usuário (nome, matrícula, curso, e-mail).  
+- Alunos acessam um mural com todas as ideias disponíveis, podendo fazer buscas e utilizar filtros para achar a ideia que mais se assemelha com suas expectativas e convicções.  
+- Diferenciação de perfis (Aluno x Professor), cada um com suas respectivas funcionalidades.  
+- Exibição detalhada de cada ideia (Professor detentor da ideia, seu departamento, titulo da ideia, descrição, tecnologias, cursos, status...).  
+- Perfil básico de usuário (nome, matrícula, curso, departamento, e-mail).  
 
 ---
 
 ## 🛠️ Tecnologias
 
-- **Backend:** C# .NET  
-- **Frontend:** HTML, CSS, JavaScript (ou React, dependendo da evolução)  
-- **Banco de Dados:** A definir  
+- **Backend:** Java Spring Boot  
+- **Frontend:** HTML, CSS, JavaScript
+- **Banco de Dados:** MySQL  
 - **Controle de Versão:** Git + GitHub  
 
 ---
