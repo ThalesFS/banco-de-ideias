@@ -10,6 +10,14 @@
 </head>
 
 <body>
+
+    <script>
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        if (!usuario) {
+            window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
+        }
+    </script>
+
     <header class="navbar">
         <div class="logo">
             <a href="/professorHome.html">
@@ -71,12 +79,6 @@
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // --- Protege a página ---
-            const usuario = JSON.parse(localStorage.getItem("usuario"));
-            if (!usuario) {
-                window.location.href = "login.html";
-                return;
-            }
 
             // --- Logout ---
             document.getElementById("logout").addEventListener("click", () => {

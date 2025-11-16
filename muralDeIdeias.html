@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mural de Ideias - Banco de Ideias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/estilos/muralDeIdeias.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <a href="/professorHome.html">
+                <img src="/imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI">
+            </a>
+        </div>
+        <a href="#" class="logout" id="logout">Logout ↗</a>
+    </header>
+
+    <main class="container">
+        <section class="mural-box">
+            <div class="mural-header">
+                <h2>Mural de Ideias 💡</h2>
+                <a href="/professorHome.html" class="close-btn">×</a>
+            </div>
+
+            <!-- BUSCA + PAGINAÇÃO + FILTROS -->
+            <div class="toolbar">
+
+                <!-- BUSCA -->
+                <div class="search-wrapper">
+                    <input id="searchInput" type="text" placeholder="Pesquisar por tema, palavra-chave ou cursos...">
+                </div>
+
+                <!-- PAGINAÇÃO -->
+                <div class="pagination" id="pagination"></div>
+
+                <!-- FILTROS E ORDENAÇÃO -->
+                <div class="filters">
+                    <select id="filterStatus">
+                        <option value="">Todas as ideias</option>
+                        <option value="ABERTA">Abertas</option>
+                        <option value="EM_ANDAMENTO">Em andamento</option>
+                        <option value="CONCLUIDA">Concluídas</option>
+                    </select>
+
+                    <select id="orderBy">
+                        <option value="recent">Mais recente</option>
+                        <option value="old">Mais antiga</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- LISTA DE CARDS -->
+            <div id="cardsContainer" class="cards"></div>
+
+        </section>
+    </main>
+
+    <script src="mural.js"></script>
+
+</body>
+
+</html>

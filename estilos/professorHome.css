@@ -43,6 +43,7 @@ body {
   font-weight: 500;
   transition: opacity .2s;
 }
+
 .logout:hover {
   opacity: .6;
 }
