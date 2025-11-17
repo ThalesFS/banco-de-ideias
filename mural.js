@@ -12,7 +12,40 @@ const filterStatus = document.getElementById("filterStatus");
 const orderBy = document.getElementById("orderBy");
 const cardsContainer = document.getElementById("cardsContainer");
 const paginationContainer = document.getElementById("pagination");
+const iconeBDI = document.getElementById("iconeBDI");
+const closeBtn = document.getElementById("close-btn");
+const usuario = JSON.parse(localStorage.getItem("usuario"));
 
+if (!usuario) {
+    window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
+}
+
+//Redireciona o ícone BDI Home (pegando o tipo do usuario logado)
+iconeBDI.addEventListener("click", () => {
+    if (!usuario) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (usuario.tipo === "aluno") {
+        window.location.href = "alunoHome.html";
+    } else if (usuario.tipo === "professor") {
+        window.location.href = "professorHome.html";
+    }
+});
+
+closeBtn.addEventListener("click", () => {
+    if (!usuario) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    if (usuario.tipo === "aluno") {
+        window.location.href = "alunoHome.html";
+    } else if (usuario.tipo === "professor") {
+        window.location.href = "professorHome.html";
+    }
+});
 
 // CHAMADA A API
 
@@ -39,23 +72,23 @@ async function carregarIdeias() {
 
 function criarCard(ideia) {
     return `
-        <div class="card">
-            <div class="card-header">
-                <strong>${ideia.professorNome}</strong> - 
-                <span>${ideia.professorDepartamento}</span>
+            <div class="card">
+                <div class="card-header">
+                    <strong>${ideia.professorNome}</strong> - 
+                    <span>${ideia.professorDepartamento}</span>
+                </div>
+
+                <div class="card-title">${ideia.titulo}</div>
+
+                <div class="card-desc">${ideia.descricao}</div>
+
+                <div class="card-footer">
+                    <a class="btn-vermais" href="ideia.html?id=${ideia.id}">
+                        Ver mais +
+                    </a>
+                </div>
             </div>
-
-            <div class="card-title">${ideia.titulo}</div>
-
-            <div class="card-desc">${ideia.descricao}</div>
-
-            <div class="card-footer">
-                <a class="btn-vermais" href="ideia.html?id=${ideia.id}">
-                    Ver mais +
-                </a>
-            </div>
-        </div>
-    `;
+        `;
 }
 
 function montarCards(lista) {

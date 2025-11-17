@@ -1,0 +1,172 @@
+:root {
+  --primary: #22b455;
+  --bg: #f7f5f0;
+  --dark: #121212;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.iconeBDI {
+  width: 80px;
+  transition: transform 0.2s ease;
+}
+
+.iconeBDI:hover {
+  transform: scale(1.05);
+}
+
+.logout {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: opacity .2s;
+}
+
+.logout:hover {
+  opacity: .6;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.ideia-box {
+  background: #fff;
+  margin-top: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1150px;
+  padding: 3.5rem 4rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.ideia-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-buttons {
+  display: flex;
+  gap: .8rem;
+}
+
+.icon-btn {
+  font-size: 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 32px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.icon-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.close-btn {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.ideia-titulo {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1rem 0 .4rem;
+}
+
+.ideia-professor {
+  text-align: center;
+  font-weight: 500;
+  margin-top: -.3rem;
+  font-size: 1.05rem;
+  color: #555;
+}
+
+.ideia-descr {
+  background: white;
+  border: 1px solid #d8d8d8;
+  min-height: 140px;
+  padding: 1.2rem;
+  border-radius: 10px;
+  line-height: 1.5rem;
+  width: 100%;
+  resize: none;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+
+.info-icon img {
+  width: 42px;
+  height: 42px;
+}
+
+.info-block h4 {
+  margin: .4rem 0;
+  font-weight: 600;
+}
+
+.info-block p {
+  font-size: .9rem;
+  color: #555;
+}
+
+#status-ideia {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: .9rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.interesse-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.interesse-btn {
+  width: 280px;
+  padding: 1rem;
+  font-size: 1.05rem;
+  border-radius: 12px;
+  background: var(--primary);
+  transition: background .4s;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.interesse-btn:hover{
+  background-color: #15a146;
+}
