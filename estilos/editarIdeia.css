@@ -1,0 +1,139 @@
+:root {
+  --primary: #22b455;
+  --bg: #f7f5f0;
+  --dark: #121212;
+  --gray: #555;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--dark);
+}
+
+/* header */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iconeBDI {
+  width: 80px;
+  transition: transform 0.2s ease;
+}
+
+.iconeBDI:hover {
+  transform: scale(1.05);
+}
+
+.titulo {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.logout {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.logout:hover {
+  opacity: 0.6;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.form-ideia {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-header h2 {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.close-btn {
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+.close-btn:hover {
+  opacity: 0.6;
+}
+
+/* Campos do formulário */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  text-align: left;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1.2rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Botão */
+.btn-criar {
+  background-color: #84e69e; /*#b8e9c5*/
+  color:white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-criar:hover {
+  background-color: #68cf82;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+input, textarea, .btn-criar {
+  box-sizing: border-box;
+}
