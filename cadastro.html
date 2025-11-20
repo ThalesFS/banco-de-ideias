@@ -28,7 +28,7 @@
       <input id="email" type="email" placeholder="Insira seu e-mail" required>
 
       <label for="matricula">Matrícula</label>
-      <input id="matricula" type="text" placeholder="Insira sua matrícula" required>
+      <input id="matricula" type="text" pattern="[0-9]{9}" title="A matrícula deve conter 9 dígitos numéricos" placeholder="Insira sua matrícula" required>
 Voce é:
       <label><input type="radio" name="tipo" value="aluno" checked> Aluno</label>
       <label><input type="radio" name="tipo" value="professor"> Professor</label>

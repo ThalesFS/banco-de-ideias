@@ -42,12 +42,16 @@
                 required>
 
             <label for="status">Status*</label>
-            <input type="text" id="status" name="status" placeholder="Insira o status atual do projeto" required>
+            <select id="status" name="status" class="status" required>
+                <option value="aberta">ABERTA</option>
+                <option value="em andamento">EM ANDAMENTO</option>
+                <option value="concluida">CONCLUÍDA</option>
+            </select> 
 
-
-            <button type="submit" class="btn-criar">Atualizar Ideia</button>
+            <button type="submit" class="btn-atualizar">Atualizar Ideia</button>
         </form>
     </main>
+    <script src="editarIdeia.js"></script>
 </body>
 
 </html>

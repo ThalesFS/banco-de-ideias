@@ -11,6 +11,7 @@ const cursosEl = document.getElementById("cursos-ideia");
 const statusEl = document.getElementById("status-ideia");
 const btnInteresse = document.getElementById("btn-interesse");
 const iconeBDI = document.getElementById("iconeBDI");
+const botaoX = document.getElementById("close-btn");
 
 document.addEventListener("DOMContentLoaded", () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -37,6 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    botaoX.addEventListener('click', function () {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            // Se não houver histórico, redireciona para uma página padrão
+            window.location.href = '/';
+        }
+    });
+
 
     // Função para carregar dados da ideia
     async function carregarIdeia() {
@@ -55,7 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
             descricaoEl.textContent = ideia.descricao;
 
             tecnologiasEl.textContent = ideia.tecnologias || "Não informado";
-            cursosEl.textContent = ideia.cursosInteresse || "Não informado";
+            cursosEl.textContent = ideia.cursos || "Não informado";
+            if (ideia.status === "EM_ANDAMENTO") {
+                ideia.status = "EM ANDAMENTO"
+            }
             statusEl.textContent = ideia.status;
 
         } catch (erro) {

@@ -65,6 +65,7 @@ label {
   font-size:.9rem;
   margin-bottom:.3rem;
 }
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -75,6 +76,7 @@ input[type="password"] {
   font-size:.9rem;
   margin-bottom:1rem;
 }
+
 .password-field {
   position:relative;
 }
