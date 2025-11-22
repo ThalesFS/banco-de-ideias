@@ -16,11 +16,11 @@
     <header class="navbar">
         <div class="logo">
             <a href="#">
-                <img src="/imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI" id="iconeBDI"
+                <img src="/imagens/uffBDIicone.png" alt="Logo UFF Banco de Ideias" class="iconeBDI" id="iconeBDI">
             </a>
         </div>
 
-        <a href="/logout" class="logout" id="logout">Logout ↗</a>
+        <a href="#" class="logout" id="logout">Logout ↗</a>
     </header>
 
     <main class="container">
@@ -72,6 +72,12 @@
 
             <div class="interesse-wrapper" id="interesseArea">
                 <button id="btn-interesse" class="interesse-btn">Tenho Interesse</button>
+            </div>
+
+            <!-- Lista de alunos interessados (só deve aparecer para o professor dono da ideia) -->
+            <div id="bloco-interessados" class="interessados-box" style="display: none;">
+                <h2 class="interessados-titulo">Alunos Interessados 🤩</h2>
+                <ul id="lista-interessados" class="interessados-lista"></ul>
             </div>
 
         </section>

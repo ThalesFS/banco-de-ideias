@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
     }
 
+    // logout
+    document.getElementById("logout").addEventListener("click", () => {
+        localStorage.removeItem("usuario");
+        window.location.href = "index.html";
+    });
+
     // controla a visibilidade do botão "Tenho Interesse" (por enquanto será assim)
     if (!usuario || usuario.tipo !== "aluno") {
         btnInteresse.style.display = "none";
@@ -47,6 +53,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    btnInteresse.addEventListener("click", async () => {
+        try {
+            const payload = {
+                ideiaId: Number(ideiaId),
+                alunoId: usuario.id
+            };
+
+            const response = await fetch("http://localhost:8080/api/interesses", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.status === 201) {
+                alert("Interesse registrado com sucesso!");
+                window.location.href = "alunoHome.html";
+                return;
+            }
+
+            if (response.status === 409) {
+                alert("Você já demonstrou interesse nesta ideia :)");
+                return;
+            }
+
+            if (response.status === 404) {
+                alert("Erro: ideia ou aluno não encontrado.");
+                return;
+            }
+
+            throw new Error("Erro inesperado ao registrar interesse.");
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro ao registrar interesse. Veja o console para mais detalhes.");
+        }
+    });
 
     // Função para carregar dados da ideia
     async function carregarIdeia() {
@@ -73,14 +115,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (erro) {
             console.error(erro);
-            alert("Erro ao carregar a ideia. Veja o console para mais detalhes.");
+            alert("Erro ao carregar a ideia. Consulte o console");
         }
     }
     carregarIdeia();
+    carregarInteressados();
 
-    // logout
-    document.getElementById("logout").addEventListener("click", () => {
-        localStorage.removeItem("usuario");
-        window.location.href = "index.html";
-    });
+    async function carregarInteressados() {
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        if (!usuario || usuario.tipo !== "professor") {
+            return; // aluno não deve ver a lista
+        }
+
+        try {
+            // Primeiro busca a ideia para saber quem é o dono
+            const ideiaResp = await fetch(`http://localhost:8080/api/ideias/${ideiaId}`);
+            const ideia = await ideiaResp.json();
+            console.log(ideia);
+            console.log(ideia.professorId);
+            console.log(usuario.id);
+
+            if (ideia.professorId !== usuario.id) {
+                return; // professor NÃO é dono: não mostra
+            }
+
+            // Então busca lista de interessados
+            const resp = await fetch(`http://localhost:8080/api/interesses/ideia/${ideiaId}`);
+
+            if (!resp.ok) {
+                console.warn("Nenhum interessado encontrado.");
+                return;
+            }
+
+            const interessados = await resp.json();
+
+            const bloco = document.getElementById("bloco-interessados");
+            const lista = document.getElementById("lista-interessados");
+
+            bloco.style.display = "block"; // agora mostra o bloco
+
+            if (interessados.length === 0) {
+                lista.innerHTML = "<li>Nenhum aluno demonstrou interesse ainda.</li>";
+                return;
+            }
+
+            lista.innerHTML = "";
+
+            interessados.forEach(aluno => {
+                const li = document.createElement("li");
+                li.textContent = `${aluno.nome} — ${aluno.curso || "Curso não informado"}`;
+                lista.appendChild(li);
+            });
+
+        } catch (erro) {
+            console.error("Erro ao carregar interessados:", erro);
+        }
+    }
+
 });

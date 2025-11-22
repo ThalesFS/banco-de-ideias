@@ -10,7 +10,7 @@ if (!usuario) {
   window.location.href = "login.html";
 }
 
- //Redirecionamento do ícone BDI (home)
+//Redirecionamento do ícone BDI (home)
 if (iconeBDI) {
   iconeBDI.addEventListener("click", () => {
     if (!usuario) return window.location.href = "login.html";
@@ -18,13 +18,13 @@ if (iconeBDI) {
   });
 }
 
+
+
 // logout
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("usuario");
-    window.location.href = "index.html";
-  });
-}
+document.getElementById("logout").addEventListener("click", () => {
+  localStorage.removeItem("usuario");
+  window.location.href = "index.html";
+});
 
 
 // CHAMADA A API

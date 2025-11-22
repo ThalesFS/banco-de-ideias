@@ -13,11 +13,11 @@
 
   <script>
     const usuario = JSON.parse(localStorage.getItem("usuario"));
-      if (!usuario) {
-        window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
-      }
+    if (!usuario) {
+      window.location.href = "login.html"; // se nao achar o usuario logado, manda pra login
+    }
   </script>
-  
+
   <header class="navbar">
     <div class="logo">
       <a href="/alunoHome.html">
@@ -44,14 +44,22 @@
         </div>
         <p>Meu Perfil</p>
       </a>
+
+      <a href="meusInteresses.html" class="card">
+        <div class="icon">
+          <img src="/imagens/iconeIdeasInteresse.png" alt="Icone Meus Interesses">
+        </div>
+        <p>Ideias de Interesse</p>
+      </a>
     </section>
   </main>
   <script>
     // aqui é o logout simples
-    document.getElementById("logout").addEventListener("click", function() {
+    document.getElementById("logout").addEventListener("click", function () {
       localStorage.removeItem("usuario");
       window.location.href = "index.html";
     });
   </script>
 </body>
+
 </html>

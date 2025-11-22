@@ -159,7 +159,7 @@ orderBy.addEventListener("change", () => {
 // e o logout ne
 document.getElementById("logout").addEventListener("click", () => {
     localStorage.removeItem("usuario");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 });
 
 carregarIdeias();
