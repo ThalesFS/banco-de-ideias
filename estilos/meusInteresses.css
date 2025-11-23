@@ -1,0 +1,141 @@
+:root {
+  --bg: #f7f5f0;
+  --primary: #22b455;
+  --dark: #111;
+  --card-bg: #fafafa;
+  --card-border: #e4e4e4;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+/* header */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.logo img {
+  width: 80px;
+  transition: transform 0.2s;
+}
+
+.logo img:hover {
+  transform: scale(1.04);
+}
+
+.iconeBDI {
+  width: 80px;
+  transition: transform 0.2s ease;
+}
+
+.iconeBDI:hover {
+  transform: scale(1.05);
+}
+
+.logout {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  transition: opacity .2s;
+}
+
+.logout:hover {
+  opacity: .6;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  background: #fff;
+  margin-top: 2.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1150px;
+  border-radius: 18px;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.lista-interesses {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ideia-card {
+  background: var(--card-bg);
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.ideia-card:hover {
+  background: #f0f0f0;
+  border-color: var(--primary);
+}
+
+.ideia-titulo {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.15s ease;
+  cursor: pointer;
+}
+
+.card-icon img {
+  width: 15px;
+  height: 15px;
+}
+
+.card-icon:hover {
+  transform: scale(1.1);
+}
