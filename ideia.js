@@ -54,43 +54,102 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btnInteresse.addEventListener("click", async () => {
-        try {
-            const payload = {
-                ideiaId: Number(ideiaId),
-                alunoId: usuario.id
-            };
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        if (!usuario || usuario.tipo !== "aluno") return;
 
-            const response = await fetch("http://localhost:8080/api/interesses", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+        const temInteresse = btnInteresse.dataset.interesse === "ativo";
 
-            if (response.status === 201) {
-                alert("Interesse registrado com sucesso!");
-                window.location.href = "alunoHome.html";
-                return;
+        if (!temInteresse) {
+            // -------------------------------- REGISTRAR INTERESSE ---------------------------------
+            try {
+                const payload = { ideiaId: Number(ideiaId), alunoId: usuario.id };
+
+                const response = await fetch("http://localhost:8080/api/interesses", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert("Interesse registrado com sucesso!");
+                    window.location.href = "alunoHome.html";
+                    return;
+                }
+
+                // aqui serve mais para testes, o esperado é que o botão mude e nao ocorra este cenário
+                if (response.status === 409) {
+                    alert("Você já demonstrou interesse nesta ideia :)");
+                    return;
+                }
+
+                alert("Erro ao registrar interesse.");
+
+            } catch (erro) {
+                console.error(erro);
+                alert("Erro ao registrar interesse.");
             }
+            // -------------------------------- REGISTRAR INTERESSE ---------------------------------
+        } else {
+            // ---------------------------------vv REMOVER INTERESSE vv-----------------------------------
+            const confirmar = confirm("Tem certeza de que deseja retirar seu interesse?");
+            if (!confirmar) return;
 
-            if (response.status === 409) {
-                alert("Você já demonstrou interesse nesta ideia :)");
-                return;
+            try {
+                // Primeiro busca o interesse para obter o ID
+                const busca = await fetch(`http://localhost:8080/api/interesses/buscar?alunoId=${usuario.id}&ideiaId=${ideiaId}`);
+
+                if (!busca.ok) {
+                    alert("Não foi possível localizar seu interesse para removê-lo.");
+                    return;
+                }
+
+                const interesse = await busca.json(); // aqui tem o objeto que quero o ID
+
+                const response = await fetch(`http://localhost:8080/api/interesses/${interesse.id}`, {
+                    method: "DELETE"
+                });
+
+                if (response.ok) {
+                    alert("Interesse retirado com sucesso. Há muitas outras ideias!");
+                    window.location.href = "alunoHome.html";
+                    return;
+                }
+
+                alert("Erro ao retirar interesse.");
+
+            } catch (erro) {
+                console.error(erro);
+                alert("Erro ao retirar interesse.");
             }
-
-            if (response.status === 404) {
-                alert("Erro: ideia ou aluno não encontrado.");
-                return;
-            }
-
-            throw new Error("Erro inesperado ao registrar interesse.");
-
-        } catch (erro) {
-            console.error(erro);
-            alert("Erro ao registrar interesse. Veja o console para mais detalhes.");
         }
-    });
+    });     // --------------------------------- ^^ REMOVER INTERESSE ^^ ----------------------------------
 
-    // Função para carregar dados da ideia
+    // ---------------------------------------------------------------- RESPONSAVEL POR ALTERAR O BOTÃO DE INTERESSE ---------------------------------
+    async function verificarInteresse() {
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        if (!usuario || usuario.tipo !== "aluno") return;
+
+        try {
+            const resp = await fetch(`http://localhost:8080/api/interesses/verificar?alunoId=${usuario.id}&ideiaId=${ideiaId}`);
+
+            if (resp.status === 200) {
+                // Se o aluno já tem interesse, troca o botão para o de desfazer interesse
+                btnInteresse.textContent = "Retirar Interesse";
+                btnInteresse.classList.add("btn-cancelar");
+                btnInteresse.dataset.interesse = "ativo";
+            } else {
+                // Não tem interesse -> botão normal
+                btnInteresse.textContent = "Tenho Interesse";
+                btnInteresse.classList.remove("btn-cancelar");
+                btnInteresse.dataset.interesse = "inativo";
+            }
+
+        } catch (e) {
+            console.error("Erro ao verificar interesse:", e);
+        }
+    }// ---------------------------------------------------------------- RESPONSAVEL POR ALTERAR O BOTÃO DE INTERESSE ---------------------------------
+
+    // ----------------------------------------------------------- RESPONSAVEL POR CARREGAR OS DADOS DA IDEIA ---------------------------------
     async function carregarIdeia() {
         try {
             const response = await fetch(`http://localhost:8080/api/ideias/${ideiaId}`);
@@ -117,10 +176,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(erro);
             alert("Erro ao carregar a ideia. Consulte o console");
         }
-    }
-    carregarIdeia();
-    carregarInteressados();
+    }// ----------------------------------------------------------- RESPONSAVEL POR CARREGAR OS DADOS DA IDEIA ---------------------------------
 
+    // ---------------------------------------------------------- RESPONSAVEL POR LISTAR OS ALUNOS INTERESSADOS NA IDEIA (Visualização apenas do professor dono da ideia) ---------------------------------
     async function carregarInteressados() {
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -171,6 +229,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (erro) {
             console.error("Erro ao carregar interessados:", erro);
         }
-    }
+    }// ---------------------------------------------------------- RESPONSAVEL POR LISTAR OS ALUNOS INTERESSADOS NA IDEIA (Visualização apenas do professor dono da ideia) ---------------------------------
+
+    carregarIdeia();
+    verificarInteresse();
+    carregarInteressados();
 
 });

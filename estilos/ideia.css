@@ -200,3 +200,10 @@ body {
     font-size: .95rem;
     border: 1px solid #ddd;
 }
+
+.btn-cancelar {
+    background: #d64545 !important;
+}
+.btn-cancelar:hover {
+    background: #b73737 !important;
+}
